@@ -1,0 +1,20 @@
+<p><%= @nickname %>さんの投稿一覧</p>
+
+<% @tweets.each do |tweet| %>
+  <div class="col clearfix" style="background-image: url(<% tweet.image %>);" >
+    <% if user_signed_in? && current_user.id == tweet.user_id %>
+      <ul class="clearfix align_r">
+        <li class="float-left">
+          <%= link_to "削除", "/tweets/#{tweet.id}", method: :delete %>
+        </li>
+        <li class="float-left">
+          <%= link_to "編集", "/tweets/#{tweet.id}/edit", method: :get %>
+        </li>
+      </ul>
+    <% end %>
+    <%= simple_format(tweet.text) %>
+  </div>
+<% end %>
+
+
+<%= paginate(@tweets) %>

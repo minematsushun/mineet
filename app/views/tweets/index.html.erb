@@ -1,0 +1,6 @@
+<div class="contents">
+  <% if flash[:notice] %>
+    <p class="orange lighten-2 flash"><%= flash[:notice] %></p>
+  <% end %>
+  <%= render @tweets%>
+</div>

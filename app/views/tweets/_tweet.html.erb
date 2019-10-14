@@ -1,0 +1,19 @@
+<% @tweets.each do |tweet|%>
+    <div class="col clearfix">
+      <% if user_signed_in? && current_user.id == tweet.user_id %>
+        <ul class="clearfix align_r">
+          <li class="float-left">
+            <%= link_to "削除", "/tweets/#{tweet.id}", method: :delete %>
+          </li>
+          <li class="float-left">
+            <%= link_to "編集", "/tweets/#{tweet.id}/edit", method: :get %>
+          </li>
+        </ul>
+      <% end %>
+
+      <P><%= tweet.text %></p>
+      <a href="/users/<%= tweet.user_id %>" class="float-left">
+        <p>投稿者<%= tweet.user.nickname %></p>
+      </a>
+    </div>
+  <% end %>

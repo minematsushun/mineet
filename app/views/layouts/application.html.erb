@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Mineet</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  </head>
+
+  <body>
+    <header class="teal lighten-3">
+      <nav>
+        <div class="nav-wrapper teal lighten-">
+          <a href="#" class="brand-logo">MINEET</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <% if user_signed_in? %>
+              <li><span><%= current_user.nickname %></span></li>
+              <li><%= link_to "マイページ", "/users/#{current_user.id}", method: :get %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li><a class="post" href="/tweets/new">投稿する</a></li>
+            <% else %>
+                <li><%= link_to "ログイン", new_user_session_path, class: 'post' %></li>
+                <li><%= link_to "新規登録", new_user_registration_path, class: 'post' %></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <%= yield %>
+  </body>
+</html>
